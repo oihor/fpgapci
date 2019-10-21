@@ -8,11 +8,20 @@
 
 #include "fpgapci_user.h"
 
-int main() {
+// r/w 8/16/32/64 addr [val]
+
+int main(int argc, char *argv[]) {
+
+    if(argc != 4 && argc != 5) {
+        printf("Usage: fpgapci_test_util r/w 8/16/32/64 addr [val]\n");
+        return EXIT_FAILURE;
+    }
+
     int *fd = open("/dev/fpgapci", O_RDWR);
 
     if (fd == -1) {
         printf("Open /dev/fpgapci failed! Error: %s\n", strerror(errno));
+        return EXIT_FAILURE;
     }
 
     struct FpgaPciIoCtlRwData rw_struct = { 64, 8, 0xFFEA12340987CDFF };
@@ -21,5 +30,5 @@ int main() {
 
     //ioctl(fd, FPGA_PCI_READ, &rw_struct);
 
-    return 0;
+    return EXIT_SUCCESS;
 }
