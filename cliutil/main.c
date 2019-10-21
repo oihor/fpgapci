@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
     if(strcmp(rwstr, "r") == 0) {
         read = true;
         ioctl_op = FPGA_PCI_IOCTL_READ;
-    } else if(strcmp(rwstr, "r") == 0) {
+    } else if(strcmp(rwstr, "w") == 0) {
         write= true;
         ioctl_op = FPGA_PCI_IOCTL_WRITE;
     } else {
@@ -50,13 +50,11 @@ int main(int argc, char *argv[]) {
 
     char *widthstr = argv[2];
     rw_struct.width = strtoul(widthstr, NULL, 10);
-    bool widthvalid = false;
     switch(rw_struct.width) {
     case 8:
     case 16:
     case 32:
     case 64:
-        widthvalid = true;
         break;
     default:
         printf("Usage for write: fpgapci_test_util r/w 8/16/32/64 hexaddr hexval\n");
