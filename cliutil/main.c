@@ -71,7 +71,7 @@ int main(int argc, char *argv[]) {
     }
 
     if(write) {
-        char *hexvalstr = argv[3];
+        char *hexvalstr = argv[4];
         rw_struct.val = strtoull(hexvalstr, NULL, 16);
         if(errno != 0) {
             printf("Usage for write: fpgapci_test_util r/w 8/16/32/64 hexaddr hexval\n");
